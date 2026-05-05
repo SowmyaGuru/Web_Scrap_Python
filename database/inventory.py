@@ -41,3 +41,9 @@ def insert_product(name, price, status, image_url, product_url):
         print(f"Duplicate skipped: {name}")
     finally:
         connection.close()
+
+def get_all_products():
+    with connect() as connection:
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM products")
+        return cursor.fetchall()
