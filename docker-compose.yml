@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  selenium-tests:
+    build: .
+    container_name: pytest-selenium
+    volumes:
+      - .:/app
+    command: pytest -v

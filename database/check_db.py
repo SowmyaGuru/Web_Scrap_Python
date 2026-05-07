@@ -19,3 +19,4 @@ def check_products():
      else:
         print("Successfully completed")
      connection.close()
+
