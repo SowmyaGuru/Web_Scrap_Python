@@ -3,7 +3,9 @@ from pages.inventory_pages import InventoryPage
 from database import inventory
 from database import check_db
 import allure
+import pytest
 
+@pytest.mark.regression
 def test_scrape_and_store_products(driver):
     page = InventoryPage(driver)
 
@@ -27,5 +29,7 @@ check_db.check_products()
 
 @allure.title("Verify products availability")
 @allure.description("Checks whether products available")
+
+@pytest.mark.smoke
 def test_login():
     pass
