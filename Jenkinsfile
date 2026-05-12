@@ -2,9 +2,9 @@ pipeline {
 
     agent any
 
-    tools {
-        // Optional if Python configured in Jenkins
-    }
+//     tools {
+//         // Optional if Python configured in Jenkins
+//     }
 
     environment {
         PYTHONUNBUFFERED = '1'
