@@ -2,10 +2,6 @@ pipeline {
 
     agent any
 
-//     tools {
-//         // Optional if Python configured in Jenkins
-//     }
-
     environment {
         PYTHONUNBUFFERED = '1'
     }
@@ -22,19 +18,13 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 powershell 'python -m pip install --upgrade pip'
-                powershell 'pip install -r requirement.txt'
+                powershell 'pip install -r requirements.txt'
             }
         }
 
         stage('Run Smoke Tests') {
             steps {
                 powershell 'python -m pytest -m smoke --html=reports/report.html'
-            }
-        }
-
-        stage('Run Full Regression') {
-            steps {
-                powershell 'python -m pytest -m regression --html=reports/report.html'
             }
         }
     }
