@@ -15,9 +15,9 @@ pipeline {
             }
         }
 
-        stage('Run Smoke Tests') {
+        stage('Run Regression Tests') {
             steps {
-                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pytest -m smoke --html=reports/report.html'
+                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pytest -m regression --html=reports/report.html'
             }
         }
     }
