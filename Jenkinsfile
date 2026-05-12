@@ -10,14 +10,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install --upgrade pip'
-                bat 'pip install -r requirements.txt'
+                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pip install --upgrade pip'
+                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pip install -r requirement.txt'
             }
         }
 
         stage('Run Smoke Tests') {
             steps {
-                bat 'python -m pytest -m smoke --html=reports/report.html'
+                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pytest -m smoke --html=reports/report.html'
             }
         }
     }
