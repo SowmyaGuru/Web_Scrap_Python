@@ -21,20 +21,20 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install --upgrade pip'
-                bat 'pip install -r requirement.txt'
+                powershell 'python -m pip install --upgrade pip'
+                powershell 'pip install -r requirement.txt'
             }
         }
 
         stage('Run Smoke Tests') {
             steps {
-                bat 'pytest -m smoke'
+                powershell 'python -m pytest -m smoke --html=reports/report.html'
             }
         }
 
         stage('Run Full Regression') {
             steps {
-                bat 'pytest -m regression'
+                powershell 'python -m pytest -m regression --html=reports/report.html'
             }
         }
     }
