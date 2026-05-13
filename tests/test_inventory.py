@@ -5,6 +5,9 @@ from database import check_db
 import allure
 import pytest
 
+@allure.feature("Products UI tests")
+@allure.story("Validate products status UI test")
+@allure.id("UI test1")
 @pytest.mark.regression
 def test_scrape_and_store_products(driver):
     page = InventoryPage(driver)
@@ -29,7 +32,7 @@ check_db.check_products()
 
 @allure.title("Verify products availability")
 @allure.description("Checks whether products available")
-
+@allure.id("UI test2")
 @pytest.mark.smoke
 def test_login():
     pass

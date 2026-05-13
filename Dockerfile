@@ -23,8 +23,9 @@ COPY requirement.txt .
 # Install Python packages
 RUN pip install --no-cache-dir -r requirement.txt
 
+
 # Copy project files
 COPY . .
 
 # Run tests
-CMD ["pytest", "tests/test_inventory.py"]
+CMD ["pytest", "-v", "--alluredir=allure-results"]

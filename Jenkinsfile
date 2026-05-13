@@ -35,6 +35,15 @@ pipeline {
                 reportName: 'Automation Test Report'
             ])
         }
+    post {
+        always {
+
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'allure-results']]
+            ])
+        }
 
         success {
             echo 'Pipeline executed successfully!'
@@ -44,4 +53,5 @@ pipeline {
             echo 'Pipeline failed!'
         }
     }
+}
 }

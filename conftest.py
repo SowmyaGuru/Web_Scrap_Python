@@ -3,13 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from database import inventory
 from utils.logger import setup_logger
-from selenium.webdriver.chrome.service import Service
-
-#service = Service("/usr/local/bin/chromedriver")
-
-#driver = webdriver.Chrome(service=service, options=options)
-
-
+import allure
+from utils.utility_Screenshots import take_screenshot
 
 @pytest.fixture(scope="session", autouse=True)
 def setup():
@@ -31,3 +26,23 @@ def driver():
     yield driver
 
     driver.quit()
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+
+        driver = item.funcargs.get("driver")
+
+        if driver:
+
+            screenshot_path = take_screenshot(driver)
+
+            allure.attach.file(
+                screenshot_path,
+                name="Failure Screenshot",
+                attachment_type=allure.attachment_type.PNG
+            )
