@@ -10,14 +10,17 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
+
                 bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pip install --upgrade pip'
-                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pip install -r requirement.txt'
+
+                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pip install -r requirements.txt'
             }
         }
 
         stage('Run Regression Tests') {
             steps {
-                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pytest -m regression --html=reports/report.html'
+
+                bat '"C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pytest -m regression --html=reports/report.html --alluredir=allure-results'
             }
         }
     }
@@ -34,9 +37,6 @@ pipeline {
                 reportFiles: 'report.html',
                 reportName: 'Automation Test Report'
             ])
-        }
-    post {
-        always {
 
             allure([
                 includeProperties: false,
@@ -53,5 +53,4 @@ pipeline {
             echo 'Pipeline failed!'
         }
     }
-}
 }
