@@ -54,3 +54,26 @@ pipeline {
         }
     }
 }
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/SowmyaGuru/Web_Scrap_Python'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip3 install -r requirement.txt'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'pytest -v'
+            }
+        }
+    }
+}
