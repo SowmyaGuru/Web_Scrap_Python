@@ -1,8 +1,9 @@
 pipeline {
+
     agent any
 
     environment {
-        PYTHONUNBUFFERED = '1'
+        PATH = "/var/lib/jenkins/.local/bin:${env.PATH}"
     }
 
     stages {
@@ -16,7 +17,7 @@ pipeline {
 
         stage('Run Regression Tests') {
             steps {
-                sh 'pytest -v --html=reports/report.html'
+                sh 'python3 -m pytest -v --html=reports/report.html'
             }
         }
     }
