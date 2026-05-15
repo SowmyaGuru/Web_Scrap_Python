@@ -37,41 +37,25 @@ pipeline {
         }
 
         success {
+
+            emailext(
+                subject: "Jenkins Build Success - ${env.JOB_NAME}",
+                body: "Build Passed Successfully.\nBuild URL: ${env.BUILD_URL}",
+                to: "sowmyaguru62@gmail.com"
+            )
+
             echo 'Pipeline executed successfully!'
         }
 
         failure {
+
+            emailext(
+                subject: "Jenkins Build Failed - ${env.JOB_NAME}",
+                body: "Build Failed.\nCheck Console: ${env.BUILD_URL}",
+                to: "sowmyaguru62@gmail.com"
+            )
+
             echo 'Pipeline failed!'
         }
-    }
-}
-post {
-
-    always {
-
-        publishHTML([
-            allowMissing: true,
-            alwaysLinkToLastBuild: true,
-            keepAll: true,
-            reportDir: 'reports',
-            reportFiles: 'report.html',
-            reportName: 'Automation Test Report'
-        ])
-    }
-
-    success {
-        emailext(
-            subject: "Jenkins Build Success - ${env.JOB_NAME}",
-            body: "Build Passed Successfully.\nBuild URL: ${env.BUILD_URL}",
-            to: "sowmyaguru62@gmail.com"
-        )
-    }
-
-    failure {
-        emailext(
-            subject: "Jenkins Build Failed - ${env.JOB_NAME}",
-            body: "Build Failed.\nCheck Console: ${env.BUILD_URL}",
-            to: "sowmyaguru62@gmail.com"
-        )
     }
 }
