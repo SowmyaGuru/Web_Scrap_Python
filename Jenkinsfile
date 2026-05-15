@@ -8,11 +8,7 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/SowmyaGuru/Web_Scrap_Python'
-            }
-        }
+
 
         stage('Install Dependencies') {
             steps {
