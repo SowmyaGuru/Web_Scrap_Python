@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     environment {
@@ -8,18 +7,16 @@ pipeline {
 
     stages {
 
-
-
         stage('Install Dependencies') {
             steps {
-                sh 'pip3 install --upgrade pip'
-                sh 'pip3 install -r requirement.txt'
+                sh 'pip3 install --break-system-packages --upgrade pip'
+                sh 'pip3 install --break-system-packages -r requirement.txt'
             }
         }
 
         stage('Run Regression Tests') {
             steps {
-                sh 'pytest -m regression --html=reports/report.html --alluredir=allure-results'
+                sh 'pytest -v --html=reports/report.html'
             }
         }
     }
